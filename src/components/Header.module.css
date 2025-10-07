@@ -1,0 +1,247 @@
+.header {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(41, 98, 255, 0.2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* mesma largura do about */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.headerScrolled {
+  background: rgba(10, 10, 10, 0.95);
+  padding: 0.8rem 0;
+  box-shadow: 0 5px 20px rgba(41, 98, 255, 0.1);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo::before {
+  content: '</>';
+  position: absolute;
+  left: -30px;
+  color: #2962ff;
+  font-size: 1.2rem;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+  align-items: center;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::before {
+  width: 100%;
+}
+
+.navLink:hover {
+  color: #2962ff;
+}
+
+.navIndicator {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.navLinkActive {
+  color: #2962ff;
+}
+
+.navLinkActive::before {
+  width: 100%;
+}
+
+/* Menu Hamburguer para mobile */
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.menuBar {
+  width: 25px;
+  height: 3px;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menuToggle.active .menuBar:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menuToggle.active .menuBar:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle.active .menuBar:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Botão de modo escuro/claro (opcional) */
+.themeToggle {
+  background: transparent;
+  border: 2px solid #2962ff;
+  color: #2962ff;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  margin-left: 2rem;
+}
+
+.themeToggle:hover {
+  background: rgba(41, 98, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Efeito de partículas no header */
+.headerParticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #2962ff;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10px) translateX(10px);
+    opacity: 0.5;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .menuToggle {
+    display: flex;
+  }
+
+  .navList {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border-top: 1px solid rgba(41, 98, 255, 0.2);
+  }
+
+  .navList.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navLink {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+    display: block;
+    text-align: center;
+  }
+
+  .themeToggle {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .logo::before {
+    left: -25px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .logo::before {
+    left: -20px;
+    font-size: 0.9rem;
+  }
+}

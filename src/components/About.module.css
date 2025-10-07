@@ -1,0 +1,244 @@
+.about {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 70% 30%, rgba(41, 98, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(0, 176, 255, 0.1) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.container {
+  max-width: 1200px; /* mesma do header */
+  margin: 0 auto;
+  padding: 0 20px; /* mesmo padding do header */
+  position: relative;
+  z-index: 1;
+}
+
+.aboutContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.aboutText {
+  padding-right: 2rem;
+}
+
+.aboutTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, #ffffff, #2962ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.aboutTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  border-radius: 2px;
+}
+
+.aboutDescription {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #b0b0b0;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  color: #2962ff;
+  font-weight: 600;
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.techItem {
+  background: rgba(41, 98, 255, 0.1);
+  border: 1px solid rgba(41, 98, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #2962ff;
+  transition: all 0.3s ease;
+}
+
+.techItem:hover {
+  background: rgba(41, 98, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(41, 98, 255, 0.2);
+}
+
+.aboutImage {
+  position: relative;
+  text-align: center;
+}
+
+.imageWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profileImage {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  padding: 5px;
+  filter: grayscale(0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.profileImage:hover {
+  filter: grayscale(0);
+  transform: scale(1.02);
+}
+
+.profileImg {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 15px;
+  display: block;
+}
+
+.imageGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  border-radius: 20px;
+  filter: blur(20px);
+  opacity: 0.3;
+  z-index: -1;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #2962ff, #00b0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 968px) {
+  .aboutContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .aboutText {
+    padding-right: 0;
+  }
+  
+  .aboutTitle::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 80px 0;
+  }
+  
+  .aboutTitle {
+    font-size: 2.5rem;
+  }
+  
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .techStack {
+    justify-content: center;
+  }
+  
+  .profileImg {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutTitle {
+    font-size: 2rem;
+  }
+  
+  .aboutDescription {
+    font-size: 1rem;
+  }
+  
+  .techItem {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .profileImg {
+    height: 300px;
+  }
+}
