@@ -1,71 +1,190 @@
-export default function Footer() {
+import { useLanguage } from '../contexts/languageContext';
+import styles from "./Footer.module.css";
+
+const Footer = () => {
+  const { isEnglish } = useLanguage();
+
+  const content = {
+    pt: {
+      quickLinks: "Navegação Rápida",
+      tech: "Tecnologias",
+      rights: "© 2025 Gabriel Yamakishi. Todos os direitos reservados.",
+      madeWith: "Feito com React e muito ☕",
+      links: {
+        home: "Início",
+        projects: "Projetos",
+        contact: "Contato"
+      },
+      technologies: {
+        frontend: "Frontend",
+        backend: "Backend",
+        tools: "Ferramentas"
+      }
+    },
+    en: {
+      quickLinks: "Quick Navigation",
+      tech: "Technologies",
+      rights: "© 2025 Gabriel Yamakishi. All rights reserved.",
+      madeWith: "Made with React and lots of ☕",
+      links: {
+        home: "Home",
+        projects: "Projects",
+        contact: "Contact"
+      },
+      technologies: {
+        frontend: "Frontend",
+        backend: "Backend",
+        tools: "Tools"
+      }
+    }
+  };
+
+  const current = isEnglish ? content.en : content.pt;
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const techStack = {
+    frontend: ["React.js", "Vue.js", "JavaScript", "TypeScript", "CSS3", "HTML5"],
+    backend: ["Node.js", "SQL Server", "MySQL", "Python", "REST APIs"],
+    tools: ["Git", "WordPress", "WooCommerce", "Figma", "VS Code"]
+  };
+
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8">
-      <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-        {/* Logo / Nome */}
-        <div className="mb-4 md:mb-0">
-          <h1 className="text-xl font-bold text-white">Gabriel Yamakishi</h1>
-          <p className="text-gray-400 text-sm">Frontend Developer</p>
+    <footer id="footer" className={styles.footer}>
+      <div className={styles.container}>
+        {/* Main Footer Content */}
+        <div className={styles.footerContent}>
+          {/* Quick Links */}
+          <div className={styles.linksGroup}>
+            <h4 className={styles.linksTitle}>{current.quickLinks}</h4>
+            <ul className={styles.linksList}>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className={styles.footerLink}
+                >
+                  {current.links.home}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('projects')}
+                  className={styles.footerLink}
+                >
+                  {current.links.projects}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className={styles.footerLink}
+                >
+                  {current.links.contact}
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Technologies */}
+          <div className={styles.linksGroup}>
+            <h4 className={styles.linksTitle}>{current.tech}</h4>
+            <div className={styles.techColumns}>
+              <div className={styles.techGroup}>
+                <h5 className={styles.techSubtitle}>{current.technologies.frontend}</h5>
+                <ul className={styles.techList}>
+                  {techStack.frontend.map((tech, index) => (
+                    <li key={index} className={styles.techItem}>{tech}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className={styles.techGroup}>
+                <h5 className={styles.techSubtitle}>{current.technologies.backend}</h5>
+                <ul className={styles.techList}>
+                  {techStack.backend.map((tech, index) => (
+                    <li key={index} className={styles.techItem}>{tech}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className={styles.techGroup}>
+                <h5 className={styles.techSubtitle}>{current.technologies.tools}</h5>
+                <ul className={styles.techList}>
+                  {techStack.tools.map((tech, index) => (
+                    <li key={index} className={styles.techItem}>{tech}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Social & Contact */}
+          <div className={styles.linksGroup}>
+            <h4 className={styles.linksTitle}>Connect</h4>
+            <div className={styles.socialLinks}>
+              <a 
+                href="https://www.linkedin.com/in/gabriel-yamakishi-13a6361a3/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.socialLink}
+                title="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+              </a>
+              <a 
+                href="https://github.com/yamakishi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.socialLink}
+                title="GitHub"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+              <a 
+                href="mailto:gabriel.yamakishi@gmail.com" 
+                className={styles.socialLink}
+                title="Email"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                Email
+              </a>
+              <a 
+                href="https://wa.me/5519971237194" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.socialLink}
+                title="WhatsApp"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.017 2.047C6.207 2.047 1.451 6.804 1.451 12.614c0 1.846.48 3.582 1.32 5.082L2.021 21.975l4.408-1.159c1.431.767 3.051 1.21 4.741 1.21 5.811 0 10.567-4.757 10.567-10.567S17.828 2.047 12.017 2.047zm-5.94 14.57c-.241-.122-1.416-.697-1.655-.771-.241-.077-.417-.122-.417.297s.417 1.139.594 1.363c.177.225.89 1.139 2.153 1.647 1.264.509 1.264.339 1.491.318.226-.02.89-.362 1.015-.633.125-.271.125-.509.094-.633-.031-.124-.177-.203-.371-.356-.194-.152-1.015-.56-1.155-.612-.14-.052-.362-.052-.543.153-.181.204-.695.632-.851.765-.157.133-.315.148-.578.05-.262-.099-1.107-.408-2.108-1.301-.779-.694-1.304-1.551-1.457-1.813-.152-.262-.016-.404.114-.534.118-.118.262-.309.393-.463.131-.154.175-.271.262-.452.087-.181.043-.339-.022-.474-.065-.135-.594-1.431-.814-1.959-.213-.514-.43-.445-.594-.454-.162-.008-.35-.008-.537-.008-.187 0-.491.072-.749.36-.258.289-.984.96-.984 2.341 0 1.381 1.005 2.716 1.145 2.902.14.186 1.983 3.023 4.804 4.239.686.293 1.22.457 1.638.597.922.306 1.762.262 2.427.159.734-.115 2.262-.925 2.581-1.818.319-.893.319-1.658.224-1.818-.094-.16-.347-.254-.729-.454z"/>
+                </svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
 
-        {/* Links */}
-        <div className="flex flex-col sm:flex-row gap-4 text-center md:text-left">
-          <a
-            href="#about"
-            className="hover:text-white transition-colors duration-200"
-          >
-            About
-          </a>
-          <a
-            href="#projects"
-            className="hover:text-white transition-colors duration-200"
-          >
-            Projects
-          </a>
-          <a
-            href="#skills"
-            className="hover:text-white transition-colors duration-200"
-          >
-            Skills
-          </a>
-          <a
-            href="#contact"
-            className="hover:text-white transition-colors duration-200"
-          >
-            Contact
-          </a>
+        {/* Footer Bottom */}
+        <div className={styles.footerBottom}>
+          <div className={styles.footerBottomContent}>
+            <p className={styles.copyright}>{current.rights}</p>
+            <p className={styles.madeWith}>{current.madeWith}</p>
+          </div>
         </div>
-
-        {/* Redes sociais */}
-        <div className="flex gap-4 mt-4 md:mt-0">
-          <a
-            href="https://github.com/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com/in/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="mailto:yourname@email.com"
-            className="hover:text-white transition-colors duration-200"
-          >
-            Email
-          </a>
-        </div>
-      </div>
-
-      <div className="text-center text-gray-500 text-sm mt-6">
-        © {new Date().getFullYear()} Gabriel Yamakishi. All rights reserved.
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

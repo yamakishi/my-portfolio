@@ -1,32 +1,50 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/languageContext';
+import { useScrollToSection } from '../hooks/useScrollToSection';
 import styles from "./Header.module.css";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const scrollToSection = useScrollToSection();
+  const { isEnglish, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Atualizar seção ativa baseada no scroll
       const sections = ['home', 'about', 'projects', 'skills', 'contact'];
-      const current = sections.find(section => {
+      const scrollPosition = window.scrollY + 100; // Offset para detecção
+      
+      let current = 'home';
+      
+      for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          // Se a posição do scroll está dentro da seção
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            current = section;
+            break;
+          }
         }
-        return false;
-      });
-      
-      if (current) {
-        setActiveSection(current);
       }
+      
+      // Fallback: se chegou no final da página, considera "contact"
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+        current = 'contact';
+      }
+      
+      setActiveSection(current);
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Chama uma vez para definir a seção inicial
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -35,11 +53,10 @@ function Header() {
     setActiveSection(section);
   };
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const navItems = {
+    about: isEnglish ? 'Home' : 'Início',
+    projects: isEnglish ? 'Projects' : 'Projetos',
+    contact: isEnglish ? 'Contact' : 'Contato'
   };
 
   return (
@@ -52,17 +69,28 @@ function Header() {
           GY
         </div>
 
-        <div 
-          className={`${styles.menuToggle} ${isMenuOpen ? styles.active : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <div className={styles.menuBar}></div>
-          <div className={styles.menuBar}></div>
-          <div className={styles.menuBar}></div>
+        <div className={styles.navRight}>
+          {/* Botão de Idioma */}
+          <button 
+            className={styles.languageBtn}
+            onClick={toggleLanguage}
+          >
+            {isEnglish ? 'Traduzir para o Português' : 'Translate to English'}
+          </button>
+
+          {/* Menu Hamburguer */}
+          <div 
+            className={`${styles.menuToggle} ${isMenuOpen ? styles.active : ''}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <div className={styles.menuBar}></div>
+            <div className={styles.menuBar}></div>
+            <div className={styles.menuBar}></div>
+          </div>
         </div>
 
         <ul className={`${styles.navList} ${isMenuOpen ? styles.active : ''}`}>
-          {['home', 'about', 'projects', 'skills', 'contact'].map((section) => (
+          {Object.entries(navItems).map(([section, label]) => (
             <li key={section} className={styles.navItem}>
               <a 
                 href={`#${section}`}
@@ -75,11 +103,7 @@ function Header() {
                   scrollToSection(section);
                 }}
               >
-                {section === 'home' && 'Início'}
-                {section === 'about' && 'Sobre'}
-                {section === 'projects' && 'Projetos'}
-                {section === 'skills' && 'Habilidades'}
-                {section === 'contact' && 'Contato'}
+                {label}
               </a>
               {activeSection === section && (
                 <div className={styles.navIndicator}></div>

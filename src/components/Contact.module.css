@@ -1,0 +1,231 @@
+.contact {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 70%, rgba(41, 98, 255, 0.1) 0%, transparent 50%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #ffffff, #2962ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.contactGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.contactCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(41, 98, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  flex: 0 1 400px;
+}
+
+.contactCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(41, 98, 255, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.contactCard:hover {
+  transform: translateY(-5px);
+  border-color: #2962ff;
+  box-shadow: 0 15px 30px rgba(41, 98, 255, 0.2);
+}
+
+.contactCard:hover::before {
+  left: 100%;
+}
+
+.contactIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.contactIcon svg {
+  width: 2rem;
+  height: 2rem;
+  color: #2962ff;
+  transition: all 0.3s ease;
+}
+
+.contactCard:hover .contactIcon svg {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.contactInfo {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.contactName {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.contactValue {
+  color: #b0b0b0;
+  font-size: 1rem;
+  margin: 0;
+  word-break: break-word;
+}
+
+.contactArrow {
+  font-size: 1.5rem;
+  color: #2962ff;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.contactCard:hover .contactArrow {
+  transform: translateX(5px);
+}
+
+.footer {
+  text-align: center;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.availability {
+  font-size: 1.1rem;
+  color: #4ade80;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.response {
+  color: #b0b0b0;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .contactGrid {
+    gap: 1.5rem;
+  }
+
+  .contactCard {
+    padding: 1.5rem;
+    max-width: 100%;
+    flex: 0 1 100%;
+  }
+
+  .contactIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contactIcon svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .contactCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .contactIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contactIcon svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .contactName {
+    font-size: 1.1rem;
+  }
+
+  .contactValue {
+    font-size: 0.9rem;
+  }
+}
