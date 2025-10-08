@@ -22,6 +22,6 @@ export const projects = [
     tech: ["React.js", "CSS Modules", "Responsive Design"],
     description: "Designed and developed my personal portfolio website from scratch, showcasing projects and skills.",
     image: myPortfolioImage,
-    link: "https://seu-portfolio-url.com"
+    link: "https://github.com/yamakishi/my-portfolio"
   }
 ];
