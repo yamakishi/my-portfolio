@@ -9,6 +9,46 @@
   padding: 1rem 0;
 }
 
+/* Language Button Styles */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.languageBtn {
+  background: rgba(41, 98, 255, 0.1);
+  border: 1px solid rgba(41, 98, 255, 0.3);
+  color: #2962ff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  min-width: 60px;
+}
+
+.languageBtn:hover {
+  background: rgba(41, 98, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(41, 98, 255, 0.2);
+}
+
+/* Ajuste para mobile */
+@media (max-width: 768px) {
+  .navRight {
+    gap: 0.5rem;
+  }
+  
+  .languageBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: 50px;
+  }
+}
+
 .nav {
   display: flex;
   justify-content: space-between;

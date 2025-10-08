@@ -2,7 +2,6 @@
   padding: 100px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
   position: relative;
 }
 
@@ -31,9 +30,30 @@
 }
 
 .projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2.5rem;
+}
+
+.projectsGrid > * {
+  width: 350px;
+  height: 500px; /* Altura aumentada */
+  flex: 0 0 auto; 
+}
+
+/* Container de imagem com tamanho fixo */
+.projectsGrid .imageContainer {
+  width: 350px;
+  height: 170px; /* Tamanho fixo para todas as imagens */
+  position: relative;
+  overflow: hidden;
+}
+
+.projectsGrid .projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem preencha o container */
 }
 
 /* Responsive */
@@ -47,7 +67,38 @@
   }
   
   .projectsGrid {
-    grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  
+  .projectsGrid > * {
+    width: 100%;
+    max-width: 400px;
+    height: 480px; /* Altura ajustada para tablet */
+  }
+  
+  .projectsGrid .imageContainer {
+    width: 100%;
+    height: 170px; /* Mantém a mesma altura */
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsTitle {
+    font-size: 2rem;
+  }
+  
+  .projectsGrid {
+    gap: 1.5rem;
+  }
+  
+  .projectsGrid > * {
+    max-width: 100%;
+    height: 460px; /* Altura ajustada para mobile */
+  }
+  
+  .projectsGrid .imageContainer {
+    width: 100%;
+    height: 170px; /* Mantém a mesma altura */
   }
 }

@@ -19,11 +19,49 @@
 }
 
 .container {
-  max-width: 1200px; /* mesma do header */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px; /* mesmo padding do header */
+  padding: 0 20px;
   position: relative;
   z-index: 1;
+}
+
+/* Language Toggle Styles */
+.languageToggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.toggleBtn {
+  background: rgba(41, 98, 255, 0.1);
+  border: 1px solid rgba(41, 98, 255, 0.3);
+  color: #2962ff;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.toggleBtn:hover {
+  background: rgba(41, 98, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(41, 98, 255, 0.2);
+}
+
+.aboutDescription {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  background: linear-gradient(45deg, #2962ff, #00bcd4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
 }
 
 .aboutContent {
@@ -66,11 +104,6 @@
   margin-bottom: 2rem;
 }
 
-.highlight {
-  color: #2962ff;
-  font-weight: 600;
-}
-
 .techStack {
   display: flex;
   flex-wrap: wrap;
@@ -94,14 +127,20 @@
   box-shadow: 0 5px 15px rgba(41, 98, 255, 0.2);
 }
 
+/* IMAGEM CENTRALIZADA */
 .aboutImage {
   position: relative;
-  text-align: center;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
 }
 
 .imageWrapper {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px; /* Mantém o tamanho máximo */
 }
 
 .profileImage {
@@ -199,6 +238,16 @@
     left: 50%;
     transform: translateX(-50%);
   }
+  
+  /* Garante que a imagem fique centralizada no mobile */
+  .aboutImage {
+    justify-content: center;
+  }
+  
+  .imageWrapper {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -240,5 +289,9 @@
   
   .profileImg {
     height: 300px;
+  }
+  
+  .profileImage {
+    max-width: 100%; /* Permite que a imagem se adapte ao container */
   }
 }
